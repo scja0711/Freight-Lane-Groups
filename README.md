@@ -3,7 +3,8 @@ Groups lanes together.
 
 Situation & Task:  As a data science consultant at a third-party logistics startup,  I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. 
 
-Action:  My application identified groupings of 10-20 routes that could be priced on the same level in our pricing model.
+Action
+My application identified groupings of 10-20 routes that could be priced on the same level in our pricing model.
 On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, and I added functionalities that allow you to visualize the primary arteries in your logistics network.
 
 The following application outputs improve the clarity and interpretability an annual bid process.
