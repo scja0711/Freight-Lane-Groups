@@ -1,49 +1,55 @@
  <!DOCTYPE html>
 <html>
-  <p> 
-    Freight_Lane_Groups<br><br>
+  <p>
+   Freight_Lane_Groups<br><br>
+   As a data science consultant at a third-party logistics startup, 
+   I created an application that clarified an annual bidding process. 
+   The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. 
+   My application identified groupings of 10-20 routes that could be priced on the same level in our pricing model. 
+   On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, 
+   and I added functionalities that allow you to visualize the primary arteries in a logistics network. 
+   
+   A map of a simple random sample of 200 / 5,000 routes.<br>
+   <a href="routes.html">routes</a><br><br>
 
-    As a data science consultant at a third-party logistics startup, I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities.<br><br>
+   A map of the routes grouped together. Each line represents a group of 10-20 routes.<br>
+   <a href="route_groups.html">route_groups</a><br><br>
+   
+   A map of the route groups with color. 
+   Each color represents a hub where route groups connect.<br>
+   <a href="route_groups_color_0.html">route_groups_color_0</a><br>
+   <a href="route_groups_color_1.html">route_groups_color_1</a><br>
+   <a href="route_groups_color_2.html">route_groups_color_2</a><br><br>
 
-    My application identified groupings of 10-20 routes that could be priced on the same level in our pricing model. On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, and I added functionalities that allow you to visualize the primary arteries in a logistics network. The application returns the following types of files.<br>
+   A map of the route groupings. 
+   Each hub is assigned a color. 
+   A map of hubs connected by many routes flowing back-and-forth between them.<br>
+   Larger circles represent higher importance.<br>
+   Thicker connections represent more routes.<br>
+   <a href="hubs.html">hubs</a><br><br>
 
-    A map of a simple random sample of 200 / 5,000 routes.<br>
-    <a href="routes.html">routes</a><br><br>
+   The route groups create pricing zones. 
+   Here are maps of the price zones. 
+   Each pair of shapes represents a price zone.<br>
+   <a href="pricing_zone_0.html">pricing_zone_0</a><br>
+   <a href="pricing_zone_1.html">pricing_zone_1</a><br>
+   <a href="pricing_zone_2.html">pricing_zone_2</a><br>
+   <a href="pricing_zone_3.html">pricing_zone_3</a><br>
+   <a href="pricing_zone_4.html">pricing_zone_4</a><br><br>
 
-    A map of the routes grouped together. Each line represents a group of 10-20 routes.<br>
-    <a href="route_groups.html">route_groups</a><br><br>
+   The final graph shows the distance that OPTICS travelled to reach each subsequent route. 
+   Dips in the graph represent routes that are close together compared to other routes in the region. 
+   The colors in pricing_zone_0.html correspond to the colors in reachability_0.png.<br>
+   <a href="reachability_0.png">reachability_0</a><br>
+   <a href="reachability_1.png">reachability_1</a><br>
+   <a href="reachability_2.png">reachability_2</a><br>
+   <a href="reachability_3.png">reachability_3</a><br>
+   <a href="reachability_4.png">reachability_4</a><br><br>
+   
+   In summary, the OPTICS implementation allows us to group together lanes for purposes of pricing and bidding.<br>
+   The PageRank implementation allows us to focus on the most important hubs and the route clusters connecting them.<br><br>
 
-    A map of the route groups with color. Each color represents a hub where route groups connect.<br>
-    <a href="route_groups_color_0.html">route_groups_color_0</a><br>
-    <a href="route_groups_color_1.html">route_groups_color_1</a><br>
-    <a href="route_groups_color_2.html">route_groups_color_2</a><br><br>
-
-    A map of the route groupings. Each hub is assigned a color.<br>
-    A map of hubs connected by many routes flowing back-and-forth between them.<br>
-    Larger circles represent higher importance.<br>
-    Thicker connections represent more routes.<br>
-    <a href="hubs.html">hubs</a><br><br>
-
-    In summary, the OPTICS implementation allows us to group together lanes for purposes of pricing or bidding.<br>
-    The PageRank implementation allows us to focus on the most important hubs and the route clusters connecting them.<br><br>
-
-    In addition, the route groups can be used to create pricing zones.<br>
-    A map of the price zones. Each pair of shapes represents a price zone.<br>
-    <a href="pricing_zone_0.html">pricing_zone_0</a><br>
-    <a href="pricing_zone_1.html">pricing_zone_1</a><br>
-    <a href="pricing_zone_2.html">pricing_zone_2</a><br>
-    <a href="pricing_zone_3.html">pricing_zone_3</a><br>
-    <a href="pricing_zone_4.html">pricing_zone_4</a><br><br>
-
-    The final graph shows the distance that OPTICS travelled to reach each subsequent route.<br>
-    Dips in the graph represent routes that are close together compared to other routes in the region.<br>
-    The colors in pricing_zone_0.html correspond to the colors in reachability_0.png.<br>
-    <a href="reachability_0.png">reachability_0</a><br>
-    <a href="reachability_1.png">reachability_1</a><br>
-    <a href="reachability_2.png">reachability_2</a><br>
-    <a href="reachability_3.png">reachability_3</a><br>
-    <a href="reachability_4.png">reachability_4</a><br><br>
-
+   
   </p>
 </html>
 
