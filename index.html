@@ -1,40 +1,41 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html>
   <p>
-   Freight Lane Groups
+    Freight Lane Groups<br><br>
 
-As a data science consultant at a third-party logistics startup, I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. The application identified groupings of 10-20 routes that could share a similar price. On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, and I added functionalities that enable the user to visualize the primary arteries in their logistics network.<br><br>
+    As a data science consultant at a third-party logistics startup, I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. The application identified groupings of 10-20 routes that could share a similar price. On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, and I added functionalities that enable the user to visualize the primary arteries in their logistics network.<br><br>
 
-The app receives 5,000 routes from a user. Since I do not have access to customer data, I simulate the typical customer by scattering routes about major cities. Here is a sample of 200 / 5,000 routes simulated.<br>
-<a href="routes.html">routes</a><br><br>
+    The app receives 5,000 routes from a user. Since I do not have access to customer data, I simulate the typical customer by scattering routes about major cities. Here is a sample of 200 / 5,000 routes simulated.<br>
+    <a href="routes.html">routes</a><br><br>
 
-The app groups the routes together by geography. From our 5,000 simulated routes, here is map of every grouping discovered by OPTICS. Each line is a cluster representing 10-20 routes.<br>
-<a href="route_groups.html">route_groups</a><br><br>
+    The app groups the routes together by geography. From our 5,000 simulated routes, here is map of every grouping discovered by OPTICS. Each line is a cluster representing 10-20 routes.<br>
+    <a href="route_groups.html">route_groups</a><br><br>
 
-The clusters connect to form hubs. Here are our clusters color-coded by hub.<br>
-<a href="route_groups_color_0.html">route_groups_color_0</a><br>
-<a href="route_groups_color_1.html">route_groups_color_1</a><br>
-<a href="route_groups_color_2.html">route_groups_color_2</a><br><br>
+    The clusters connect to form hubs. Here are our clusters color-coded by hub.<br>
+    <a href="route_groups_color_0.html">route_groups_color_0</a><br>
+    <a href="route_groups_color_1.html">route_groups_color_1</a><br>
+    <a href="route_groups_color_2.html">route_groups_color_2</a><br><br>
 
-Here is a network of the hubs connected by clusters. More important hubs are represented by larger circles. Larger concentrations of routes are represented by thicker connections. The connections are triangular and their routes always flow into the hubs.<br>
-<a href="hubs.html">hubs</a><br><br>
+    Here is a network of the hubs connected by clusters. More important hubs are represented by larger circles. Larger concentrations of routes are represented by thicker connections. The connections are triangular and their routes always flow into the hubs.<br>
+    <a href="hubs.html">hubs</a><br><br>
 
-The exterior perimeter of a cluster can be represented as an irregular shape. Pairs of irregular shapes represent the regions where routes occur in the cluster. Routes in a the same region share can a similar price. Here are our pricing zones as determined by the clusters.<br>
-<a href="pricing_zone_0.html">pricing_zone_0</a><br>
-<a href="pricing_zone_1.html">pricing_zone_1</a><br>
-<a href="pricing_zone_2.html">pricing_zone_2</a><br>
-<a href="pricing_zone_3.html">pricing_zone_3</a><br>
-<a href="pricing_zone_4.html">pricing_zone_4</a><br><br>
+    The exterior perimeter of a cluster can be represented as an irregular shape. Pairs of irregular shapes represent the regions where routes occur in the cluster. Routes in a the same region share can a similar price. Here are our pricing zones as determined by the clusters.<br>
+    <a href="pricing_zone_0.html">pricing_zone_0</a><br>
+    <a href="pricing_zone_1.html">pricing_zone_1</a><br>
+    <a href="pricing_zone_2.html">pricing_zone_2</a><br>
+    <a href="pricing_zone_3.html">pricing_zone_3</a><br>
+    <a href="pricing_zone_4.html">pricing_zone_4</a><br><br>
 
-The final graph shows the distance that OPTICS had to search to find each subsequent route. 
-Clusters are represented by dips in the graph. The color-codings map to pricing zone.<br>
-<a href="reachability_0.png">reachability_0</a><br>
-<a href="reachability_1.png">reachability_1</a><br>
-<a href="reachability_2.png">reachability_2</a><br>
-<a href="reachability_3.png">reachability_3</a><br>
-<a href="reachability_4.png">reachability_4</a><br><br>
+    The final graph shows the distance that OPTICS had to search to find each subsequent route. 
+    Clusters are represented by dips in the graph. The color-codings map to pricing zone.<br>
+    <a href="reachability_0.png">reachability_0</a><br>
+    <a href="reachability_1.png">reachability_1</a><br>
+    <a href="reachability_2.png">reachability_2</a><br>
+    <a href="reachability_3.png">reachability_3</a><br>
+    <a href="reachability_4.png">reachability_4</a><br><br>
 
-In summary, the OPTICS implementation allows us to group together lanes for purposes of pricing and bidding, and the PageRank implementation allows us to focus on the most important hubs and connections in our logistics network.<br><br>
-  </p>
+    In summary, the OPTICS implementation allows us to group together lanes for purposes of pricing and bidding, and the PageRank implementation allows us to focus on the most important hubs and connections in our logistics network.<br><br>
+    
+    </p>
 </html>
-
