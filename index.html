@@ -4,38 +4,41 @@
   <p>
     Freight Lane Groups<br><br>
 
-    As a data science consultant at a third-party logistics startup, I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. The application identified groupings of 10-20 routes that could share a similar price. On my own time, I pushed the model to cluster five-thousand routes using the OPTICS algorithm, and I added functionalities that enable the user to visualize the primary arteries in their logistics network.<br><br>
+    As a data science consultant at a third-party logistics startup, I created an application that clarified an annual bidding process. The business submitted annual bids for a few thousand routes spanning hundreds of major US cities. My application identified groups of 10 - 20 routes, where each route in a group could share a similar price. On my own time, I pushed the model to cluster 5,000 routes using the OPTICS clustering algorithm, and I added functionalities that enable the user to visualize the primary arteries in the logistics network.<br><br>
 
-    The app receives 5,000 routes from a user. Since I do not have access to customer data, I simulate the typical customer by scattering routes about major cities. Here is a sample of 200 / 5,000 routes simulated.<br>
-    <a href="routes.html">Routes</a><br><br>
-    
-    The app groups the routes together by geography. From our 5,000 simulated routes, here is map of every grouping discovered by OPTICS. Each line is a cluster representing 10-20 routes.<br>
-    <a href="route_groups.html">All Route Groups</a><br><br>
-    
-    The clusters connect to form hubs. Here are our clusters color-coded by hub.<br>
-    <a href="route_groups_color_0.html">Route groups 0</a><br>
-    <a href="route_groups_color_1.html">Route groups 1</a><br>
-    <a href="route_groups_color_2.html">Route groups 2</a><br><br>
-    
-    Here is a network of the hubs connected by clusters. More important hubs are represented by larger circles. Larger concentrations of routes are represented by thicker connections. The connections are triangular and their routes always flow into the hubs.<br>    
-    <a href="hubs.html">Hubs</a><br><br>
-    
-    The exterior perimeter of a cluster can be represented as an irregular shape. Pairs of irregular shapes represent the regions where routes occur in the cluster. Routes in a the same region share can a similar price. Here are our pricing zones as determined by the clusters.<br>
-    <a href="pricing_zone_0.html">pricing zone 0</a><br>
-    <a href="pricing_zone_1.html">pricing zone 1</a><br>
-    <a href="pricing_zone_2.html">pricing zone 2</a><br>
-    <a href="pricing_zone_3.html">pricing zone 3</a><br>
-    <a href="pricing_zone_4.html">pricing zone 4</a><br><br>
-    
-    The final graph shows the distance that OPTICS had to search to find each subsequent route. 
-    Clusters are represented by dips in the graph. The color-codings map to pricing zone.<br>
-    <a href="reachability_0.png">reachability_0</a><br>
-    <a href="reachability_1.png">reachability_1</a><br>
-    <a href="reachability_2.png">reachability_2</a><br>
-    <a href="reachability_3.png">reachability_3</a><br>
-    <a href="reachability_4.png">reachability_4</a><br><br>
-    
-    In summary, the OPTICS implementation allows us to group together lanes for purposes of pricing and bidding, and the PageRank implementation allows us to focus on the most important hubs and connections in our logistics network.<br><br>
-    
+    Since we are not using real customer data, we simulate a customer by scattering 5,000 routes about 200 major US cities. Here is a sample of just 200 of the routes.<br>
+        <a href="routes.html">Routes</a><br><br>
+
+    Use 'route cities' instead of 'route endpoint cities'
+
+    The total number of clusters and routes-per-cluster returned by OPTICS depends on the geographic distribution of the input routes. The user can tune the distribution of routes using 3 parameters: the total number of cities, the total number of routes, and the standard deviation of the endpoints (x/y) scattered around the cities. As a user of the application, we draw 200 cities from a bag of 998 largest US cities. From our bag of 200 cities, we draw 5,000 origins and 5,000 destinations to define 5,000 routes. The probability of a city being selected is proportional to its population; the largest city is twice as likely to be selected as the smallest city. Once route cities are selected, we pin down x/y coordinates for all routes using a normal distribution centered at each route city. We set the standard deviation to 200 km, which is roughly the distance from Chicago to Minneapolis.<br><br>
+
+    OPTICS creates 115 clusters. Most clusters are between 10 - 15 routes. OPTICS discards 4,152 (83.04%) routes as noise, because the routes are scattered too far apart. OPTICS accepts 848 (16.96%) routes as clusters, because the routes are packed closer together compared to the 4,152 (83.04%) routes discarded as noise. Here is a map of the clusters formed.<br>
+        <a href="route_groups.html">Route Groups, All</a><br><br>
+
+    The clusters connect to form hubs. Here are the clusters color-coded by hub.
+        <a href="route_groups_color_0.html">Clusters  0 -  5</a><br>
+        <a href="route_groups_color_1.html">Clusters  5 - 10</a><br>
+        <a href="route_groups_color_2.html">Clusters 10 - 15</a><br><br>
+
+    The hubs and clusters form a network illustrated below. The application uses PageRank to determine the importance of each hub. More important hubs are represented by larger circles. Larger concentrations of routes are represented by thicker connections. Routes flow into the hubs.<br>    
+        <a href="hubs.html">Hubs</a><br><br>
+
+
+
+    Imagine stretching a yellow rubberband around all the origins in a cluster. Now imagine stretching another yellow rubberband around all the destinations in a cluster. Okay, now do this for 5 more clusters, and show the results on a map. The irregular shapes formed by the rubberbands are pricing zones, where routes inside share a similar price.<br>
+    <a href="pricing_zone_0.html">Pricing Zone 0</a><br>
+    <a href="pricing_zone_1.html">Pricing Zone 1</a><br>
+    <a href="pricing_zone_2.html">Pricing Zone 2</a><br>
+    <a href="pricing_zone_3.html">Pricing Zone 3</a><br>
+    <a href="pricing_zone_4.html">Pricing Zone 4</a><br><br>
+
+    OPTICS works by hopping around the map in search of the next nearest route. If the next route is far away, then the reachability distance is high. In contrast, if the next route is close by, then the reachability-distance is low. The dips represent areas where routes are relatively close together. Pronounced dips are clusters. The clusters are color-coded in alignment with the pricing zones, above.<br>
+    <a href="reachability_0.png">Reachability 0</a><br>
+    <a href="reachability_1.png">Reachability 1</a><br>
+    <a href="reachability_2.png">Reachability 2</a><br>
+    <a href="reachability_3.png">Reachability 3</a><br>
+    <a href="reachability_4.png">Reachability 4</a><br><br>
+
     </p>
 </html>
