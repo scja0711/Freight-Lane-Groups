@@ -11,13 +11,6 @@
       <li><a href="routes.html">Routes</a></li><br>
     </ul>
   
-    The total number of clusters and the number of routes per cluster depends on the geographic distribution of the input routes. The user can tune the distribution of routes using 3 parameters:<br>
-    <ul>
-      <li>The total number of cities</li>
-      <li>The total number of routes</li>
-      <li>The standard deviation of the endpoints (x/y) scattered around the city endpoints</li>
-    </ul>
-  
     As a user of the application, we draw 200 cities from a bag of the 998 largest US cities. From our bag of 200 cities, we draw 5,000 origins and 5,000 destinations to form 5,000 routes. The probability of a city being selected is proportional to its population; the largest city is twice as likely to be selected as the smallest city. Once the origin and destination cities are selected for each route, we define route endpoints in terms of x/y coordinates using a normal distribution centered at the city. We set the standard deviation to 200 km, which is roughly the distance from Chicago to Minneapolis.<br>
 
     OPTICS creates 115 clusters. Most clusters are composed of between 10 - 15 routes. OPTICS discards 4,152 (83.04%) routes as noise, because the routes are scattered too far apart. OPTICS accepts 848 (16.96%) routes as clusters, because the routes are packed closer together compared to the 4,152 (83.04%) routes discarded as noise. Here is a map of the clusters.<br>
