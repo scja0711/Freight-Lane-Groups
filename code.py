@@ -1,3 +1,4 @@
+
 def clear_folder(folder):
     '''Deletes all items in a folder'''
     for filename in os.listdir(folder):
@@ -153,6 +154,7 @@ def clusters_projection(df, cluster_params, color, proj):
     return df
 
 def clusters_partition(df, color, size):
+    '''Establishes hubs wherever two or more clusters connect.'''
     params = {'cluster_method':'xi', 'metric':'cityblock', 'xi':0.05,
               'min_cluster_size':None, 'max_eps':np.inf, 'n_jobs':None}
     model = OPTICS(**params)
@@ -166,6 +168,7 @@ def clusters_partition(df, color, size):
     return df
 
 def hub_page(clusters, routes):
+    '''Discards routes not spanning two hubs. Hubs & clusters are nodes & edges in graph theory.'''
     clusters.reset_index(inplace=True)
     clusters.set_index(['route_cluster', 'endpoint'], inplace=True)
     routes.reset_index(inplace=True)
@@ -180,6 +183,7 @@ def hub_page(clusters, routes):
     return page, clusters, routes
 
 def hub_rank(page):
+    '''Calculates PageRank of the nodes'''
     page.reset_index(inplace=True)
     page.set_index(['route', 'endpoint'], inplace=True)
     page.sort_index(ascending=True, inplace=True)
@@ -199,6 +203,7 @@ def hub_rank(page):
     return page, rank, graph
 
 def rank_format(df, page, clusters, color_hex):
+    '''Assigns colors to distinguish between hubs. Identifies top PageRank hubs'''
     hub_color = clusters.copy().reset_index()
     hub_color = hub_color[['hub', 'hub_color']].drop_duplicates()    
     hub_color.set_index('hub', inplace=True)
@@ -215,10 +220,11 @@ def rank_format(df, page, clusters, color_hex):
     mask = df['place'] == -1
     df['alpha'] = 1
     df.loc[mask, 'alpha'] = 0.2
-    scaler = MinMaxScaler()
+    #scaler = MinMaxScaler()
     return df
 
 def edge_define(graph):
+    '''Counts routes entering each hub'''
     scaler = MinMaxScaler((0.1, 1.0))
     df = graph.groupby(['orig', 'dest']).size()
     df.sort_values(ascending=False, inplace=True)
@@ -231,6 +237,7 @@ def edge_define(graph):
     return df
 
 def edge_triangle(df):
+    '''Sizes each triangle in proportion to the number of routes running into the hub'''
     df['dx'] = df['x_orig'] - df['x_dest']
     df['dy'] = df['y_orig'] - df['y_dest']
     df['length'] = (df['dx']**2 + df['dy']**2).apply(np.sqrt)
@@ -243,6 +250,7 @@ def edge_triangle(df):
     return df
 
 def edge_format(df):
+    '''Transforms edge x/y coordinates to lat/lon'''
     post_list = ['_orig', '_dest', '_top', '_bottom']
     for post in post_list:
         x, y, lon, lat = [s + post for s in ['x', 'y', 'lon', 'lat']]
@@ -251,6 +259,7 @@ def edge_format(df):
     return df
 
 def clusters_geometric(df, hull_maps):
+    '''Draws hulls (stretches a rubberband) around the routes in a cluster.'''
     df.reset_index(inplace=True)
     df.set_index(['map_number', 'route_cluster', 'endpoint'], inplace=True)
     map_unique = df.index.get_level_values(level='map_number').unique()
@@ -273,6 +282,7 @@ def clusters_geometric(df, hull_maps):
     return
 
 def routes_show(df, routes_per):
+    '''Shows a simple random sample of routes'''
     df.index.name = 'point_id'
     df.reset_index(inplace=True)
     df.set_index(['route', 'endpoint'], inplace=True)
@@ -290,6 +300,7 @@ def routes_show(df, routes_per):
     return
 
 def clusters_monochromatic(df):
+    '''Shows all clusters.'''
     df.reset_index(inplace=True)
     df.set_index(['route_cluster', 'endpoint'], inplace=True)
     df.sort_index(ascending=False, inplace=True)
@@ -306,6 +317,7 @@ def clusters_monochromatic(df):
     return len(clusters_list)
 
 def clusters_polychromatic(df):
+    '''Shows a subset of the clusters. Assigns colors to distinguish between the clusters.'''
     df.reset_index(inplace=True)
     df.set_index(['hub_group', 'route_cluster', 'endpoint'], inplace=True)
     df.sort_index(ascending=False, inplace=True)
@@ -335,6 +347,7 @@ def clusters_polychromatic(df):
     return
 
 def hub_show(clusters, rank, edge):
+    '''Shows hubs connected by routes.   Hub size ~ PageRank.   Triangle thickness ~ No. routes inflowing.  '''
     mask = rank['place'] != -1
     rank_index = rank.index[mask]
     mask = edge.index.get_level_values('dest').isin(rank_index)
@@ -524,4 +537,3 @@ fmt = '{:,} / {:,} routes ({:,}%) selected by clustering.'
 print(fmt.format(val, routes_total, np.round(val*100/routes_total, 2)))
 fmt = '{:,} / {:,} routes ({:,}%) removed by clustering.'
 print(fmt.format(routes_total - val, routes_total, np.round((routes_total - val)*100/routes_total, 2)))
-
